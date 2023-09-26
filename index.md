@@ -4,3 +4,5 @@
 
 layout: home
 ---
+
+This is a blog and portfolio page for Nate Allen. Email me at [nate@bluepail.co](mailto:nate@bluepail.co)
