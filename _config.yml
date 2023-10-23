@@ -47,6 +47,24 @@ defaults:
       author_profile: false
       share: true
 
+footer:
+  links:
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/neightallen/"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/neight-allen"
+    - label: "Youtube"
+      icon: "fab fa-fw fa-youtube"
+      url: "https://www.youtube.com/channel/UCc4fzj_aPIrCOzIIaxW-DMw"
+    - label: "Soundcloud"
+      icon: "fab fa-fw fa-soundcloud"
+      url: "https://soundcloud.com/gilcrest"
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope"
+      url: "mailto:nate@bluepail.co"
+
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.

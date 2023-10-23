@@ -10,3 +10,5 @@ A 15 minute intro for product teams that are interested in incorporating Generat
 Light on technical detail, so it should be a good primer for designers and product managers, or really anyone who has ever managed the development of a web or mobile app.
 
 {% include video id="kNiY-HYaqUc" provider="youtube" %}
+
+This talk started as a blog post which you can read [here](/2023/08/22/ai-interafaces-beyond-chatbot.html)
