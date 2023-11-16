@@ -1,6 +1,7 @@
 ---
 title: AI Resources
 permalink: "/resources/"
+layout: single
 ---
 # AI Resources
 
