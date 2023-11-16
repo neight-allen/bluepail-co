@@ -1,3 +1,7 @@
+---
+title: AI Resources
+permalink: "/resources/"
+---
 # AI Resources
 
 ## General Chatbots
