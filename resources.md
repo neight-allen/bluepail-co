@@ -3,7 +3,6 @@ title: AI Resources
 permalink: "/resources/"
 layout: single
 ---
-# AI Resources
 
 ## General Chatbots
 - [ChatGPT](https://chat.openai.com/)
