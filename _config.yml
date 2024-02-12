@@ -21,12 +21,12 @@ description: >- # this means to ignore newlines until "baseurl:"
   Google search results) and in your feed.xml site description.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://www.bluepail.co/" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
-github_username:  jekyll
+# twitter_username: jekyllrb
+# github_username:  jekyll
 
 # Build settings
 markdown: kramdown
-remote_theme: "mmistakes/minimal-mistakes@4.24.0"
+theme: "minimal-mistakes-jekyll"
 plugins:
   - jekyll-include-cache
   - jekyll-feed
@@ -66,13 +66,17 @@ footer:
       url: "mailto:nate@bluepail.co"
 
 # Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
+# Default list:
 # exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+# - .sass-cache/
+# - .jekyll-cache/
+# - gemfiles/
+# - Gemfile
+# - Gemfile.lock
+# - node_modules/
+# - vendor/bundle/
+# - vendor/cache/
+# - vendor/gems/
+# - vendor/ruby/
+# Additional excludes will be added to the list.
+# Any folders that should be processes need to be added to includes.

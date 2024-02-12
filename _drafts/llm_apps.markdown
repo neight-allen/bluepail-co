@@ -3,7 +3,7 @@ layout: single
 title: "Building an app with Generative AI"
 ---
 
-Last year I gave a talk about how we were going to start seeing application frameworks and traditional applications using generative AI. Well, the world seems to still be obsessed with chatbots. But I want to show that Large Language Models, Image Diffusers and even other AI models can be added to the applications we use today, and the interfaces we're already familiar with.
+[I gave a talk in the summer of 2023](https://www.youtube.com/watch?v=kNiY-HYaqUc) about how the chatbot is just an interface, and not the best interface. Well, the world seems to still be obsessed with chatbots. But I want to show that Large Language Models, Image Diffusers and even other AI models can be added to the applications we use today, and the interfaces we're already familiar with.
 
 I'm going to build a comic book generator. I've never really been into comic books, but it should be a good example for how to build applications with Generative AI. 
 
