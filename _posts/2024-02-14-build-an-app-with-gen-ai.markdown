@@ -3,7 +3,7 @@ layout: single
 title: "Building an app with Generative AI"
 ---
 
-[I gave a talk in the summer of 2023](https://www.youtube.com/watch?v=kNiY-HYaqUc) about how the chatbot is just an interface, and not always the best interface. Well, the chatbot obcessions rages on. 
+[I gave a talk in the summer of 2023](https://www.youtube.com/watch?v=kNiY-HYaqUc) about how the chatbot is just an interface, and not always the best interface. Well, the chatbot obsession rages on. 
 
 I want to show that Large Language Models, Image Diffusers and other AI models can augment the applications we use today using interfaces we're already familiar with.
 
@@ -22,16 +22,16 @@ I have over a decade of experience building applications. My understanding of so
 ### Bookmarks, revisions and short feedback loops
 In my experience with generative AI, you rarely get what you want on the first try. But each prompt builds on the last until you get something that kind of works. At times, I've continued to prompt only to find my best option has already passed. Sometimes I want to start over after some experimentation.
 
-It should be easy for the user to iterate, bookmark promising prompts, restore past revisions, and start over.
+It should be easy for the user to iterate, bookmark promising results, restore past revisions, build on past successes and, if needed, start over.
 
 ### A person is the primary user, an AI is secondary
 
 Put another way: Anything an AI can do, a user can do too.
 
-My goal is to build an interface first for the user. Then build an AI collaborator that can do things on the user's behalf. With our focus on bookmarks and revisions, we can always undo what the AI has done. This keeps the user in control, and demonstrates how to augment an existing applicaiton interface with GenAI functionality. I'm not convinced this is the only way, and I'm likely to put some "magic" into the app, but I think this is a good perspective.
+My goal is to build an interface first for the user. Then build an AI collaborator that can do things on the user's behalf. With our focus on bookmarks and revisions, we can always undo what the AI has done. This keeps the user in control, and demonstrates how to augment an existing application interface with GenAI functionality. I'm not convinced this is the only way, and I'm likely to put some "magic" into the app, but I think this is a good perspective.
 
 ### Have a specific workflow done in small chunks
-I imagine different layouts for different activities. Storytelling is set up separate from page layout is separate from panel layout. This keeps the tasks small a managable for today's generative models. It allows you to iterate your prompts at each stage. And smaller tasks for the AI also means quicker feedback to the user. 
+I imagine different layouts for different activities. Storytelling is set up separate from page layout is separate from panel layout. This keeps the tasks small a manageable for today's generative models. It allows you to iterate your prompts at each stage. And smaller tasks for the AI also means quicker feedback to the user. 
 
 ## Technical considerations
 
