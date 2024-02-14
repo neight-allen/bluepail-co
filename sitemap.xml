@@ -2,15 +2,19 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://www.bluepail.co//portfolio/beyond-the-chatbot.html</loc>
-<lastmod>2024-02-12T04:39:57+00:00</lastmod>
+<lastmod>2024-02-14T17:53:36+00:00</lastmod>
 </url>
 <url>
 <loc>https://www.bluepail.co//portfolio/cables-stable-diffusion.html</loc>
-<lastmod>2024-02-12T04:39:57+00:00</lastmod>
+<lastmod>2024-02-14T17:53:36+00:00</lastmod>
 </url>
 <url>
 <loc>https://www.bluepail.co//2023/08/22/ai-interafaces-beyond-chatbot.html</loc>
 <lastmod>2023-08-22T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://www.bluepail.co//2024/02/14/build-an-app-with-gen-ai.html</loc>
+<lastmod>2024-02-14T00:00:00+00:00</lastmod>
 </url>
 <url>
 <loc>https://www.bluepail.co//about/</loc>
@@ -26,6 +30,6 @@
 </url>
 <url>
 <loc>https://www.bluepail.co//oldindex.html</loc>
-<lastmod>2024-02-12T04:39:45+00:00</lastmod>
+<lastmod>2024-02-14T17:53:29+00:00</lastmod>
 </url>
 </urlset>

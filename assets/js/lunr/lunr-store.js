@@ -16,4 +16,10 @@ var store = [{
         "tags": [],
         "url": "/2023/08/22/ai-interafaces-beyond-chatbot.html",
         "teaser": null
+      },{
+        "title": "Building an app with Generative AI",
+        "excerpt":"I gave a talk in the summer of 2023 about how the chatbot is just an interface, and not always the best interface. Well, the chatbot obsession rages on. I want to show that Large Language Models, Image Diffusers and other AI models can augment the applications we use today...","categories": [],
+        "tags": [],
+        "url": "/2024/02/14/build-an-app-with-gen-ai.html",
+        "teaser": null
       }]

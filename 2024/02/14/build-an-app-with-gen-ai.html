@@ -1,0 +1,308 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Building an app with Generative AI - Blue Pail</title>
+<meta name="description" content="I gave a talk in the summer of 2023 about how the chatbot is just an interface, and not always the best interface. Well, the chatbot obsession rages on.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Blue Pail">
+<meta property="og:title" content="Building an app with Generative AI">
+<meta property="og:url" content="https://www.bluepail.co//2024/02/14/build-an-app-with-gen-ai.html">
+
+
+  <meta property="og:description" content="I gave a talk in the summer of 2023 about how the chatbot is just an interface, and not always the best interface. Well, the chatbot obsession rages on.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2024-02-14T00:00:00+00:00">
+
+
+
+
+
+
+<link rel="canonical" href="https://www.bluepail.co//2024/02/14/build-an-app-with-gen-ai.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://www.bluepail.co//"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Blue Pail Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          <img src="/assets/images/blue-pail.png" />
+          Blue Pail
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/portfolio/">Portfolio</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Building an app with Generative AI">
+    <meta itemprop="description" content="I gave a talk in the summer of 2023 about how the chatbot is just an interface, and not always the best interface. Well, the chatbot obsession rages on.">
+    <meta itemprop="datePublished" content="2024-02-14T00:00:00+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Building an app with Generative AI
+</h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p><a href="https://www.youtube.com/watch?v=kNiY-HYaqUc">I gave a talk in the summer of 2023</a> about how the chatbot is just an interface, and not always the best interface. Well, the chatbot obsession rages on.</p>
+
+<p>I want to show that Large Language Models, Image Diffusers and other AI models can augment the applications we use today using interfaces we’re already familiar with.</p>
+
+<p>To explore this idea, I plan to build a comic book studio. Personally, I’ve never really been into comic books, but it should be a good example for how to build applications with Generative AI.</p>
+
+<ul>
+  <li>Comic books are a marriage of visual art and storytelling. That gives me the opportunity to use both generative text and generative images.</li>
+  <li>Each comic is made of smaller elements, like pages and panels and speech bubbles. Today’s models do better with small tasks.</li>
+  <li>It seems fun. AI can be used in SaaS apps, or enterprise tools, but let’s get creative.</li>
+</ul>
+
+<hr />
+
+<p>I have over a decade of experience building applications. My understanding of software is through the lens of web applications. This project is an attempt to merge that experience with practical uses of generative AI. Here are some things I hope to demonstrate and explore over the coming weeks:</p>
+
+<h2 id="product-considerations">Product considerations</h2>
+
+<h3 id="bookmarks-revisions-and-short-feedback-loops">Bookmarks, revisions and short feedback loops</h3>
+<p>In my experience with generative AI, you rarely get what you want on the first try. But each prompt builds on the last until you get something that kind of works. At times, I’ve continued to prompt only to find my best option has already passed. Sometimes I want to start over after some experimentation.</p>
+
+<p>It should be easy for the user to iterate, bookmark promising results, restore past revisions, build on past successes and, if needed, start over.</p>
+
+<h3 id="a-person-is-the-primary-user-an-ai-is-secondary">A person is the primary user, an AI is secondary</h3>
+
+<p>Put another way: Anything an AI can do, a user can do too.</p>
+
+<p>My goal is to build an interface first for the user. Then build an AI collaborator that can do things on the user’s behalf. With our focus on bookmarks and revisions, we can always undo what the AI has done. This keeps the user in control, and demonstrates how to augment an existing application interface with GenAI functionality. I’m not convinced this is the only way, and I’m likely to put some “magic” into the app, but I think this is a good perspective.</p>
+
+<h3 id="have-a-specific-workflow-done-in-small-chunks">Have a specific workflow done in small chunks</h3>
+<p>I imagine different layouts for different activities. Storytelling is set up separate from page layout is separate from panel layout. This keeps the tasks small a manageable for today’s generative models. It allows you to iterate your prompts at each stage. And smaller tasks for the AI also means quicker feedback to the user.</p>
+
+<h2 id="technical-considerations">Technical considerations</h2>
+
+<h3 id="building-for-experimentation">Building for experimentation</h3>
+<p>Results from generative AI are still hard to predict. Developers need to try out different models and prompts and technologies. They need to be able to upgrade as new things come out. I think that modularity and an agile mindset are going to be a good start, but I hope to have more strategies by the end of the project.</p>
+
+<h3 id="user-feedback-strategies">User Feedback strategies</h3>
+<p>AI is trained. It tries to do more of what you like, and less of what you don’t like. But in order to train, you need data.</p>
+
+<p>The first step is keeping track of what users like and dislike. I think existing user analytics tools are going to get us started. But we also need to hold on to the AI results that the user keeps, as well as things the user discarded.</p>
+
+<p>Secondly, data needs to be fed back into the AI. This might be manually updating prompts based on what users are struggling with. It might be fine tuning models with the results they landed on. It might be more manual RLHF done by someone on the development team. I’m going to try to cover a few strategies, but there also are good resources already for creating better prompts or fine tuning models.</p>
+
+<h3 id="copyright-and-content-filtering">Copyright and Content filtering</h3>
+<p>This is the last item for a reason. I’m not particularly well versed in copyright. It’s also not clear to me how, or even what we should be filtering. But I don’t want to pretend that these models came out of a vacuum. They’re trained on the text and images that real humans put effort into and published to the web in good faith. So, I’d like to figure out how to touch on this. Let me know if you have read some great takes lately, on either copyright or content filtering in AI.</p>
+
+<hr />
+
+<p>I’m still at the begining of this journey. I don’t have it all worked out yet. You’ll get to see some paths that work, and some paths that don’t. But if this is interesting to you, stick with me.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2024-02-14T00:00:00+00:00">February 14, 2024</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/2023/08/22/ai-interafaces-beyond-chatbot.html" class="pagination--pager" title="Emerging AI interfaces: Beyond the chatbot
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://www.linkedin.com/in/neightallen/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/neight-allen" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/channel/UCc4fzj_aPIrCOzIIaxW-DMw" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+        
+          <li><a href="https://soundcloud.com/gilcrest" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-soundcloud" aria-hidden="true"></i> Soundcloud</a></li>
+        
+      
+        
+          <li><a href="mailto:nate@bluepail.co" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope" aria-hidden="true"></i> Email</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Blue Pail. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
