@@ -3,6 +3,8 @@ layout: single
 title: "Building an app with Generative AI"
 ---
 
+![A vibrant celebration between a human and a robot](/assets/images/robots-and-humans-working-together.png)
+
 [I gave a talk in the summer of 2023](https://www.youtube.com/watch?v=kNiY-HYaqUc) about how the chatbot is just an interface, and not always the best interface. Well, the chatbot obsession rages on. I want to show that Large Language Models, Image Diffusers and other AI models can augment the applications we use today using interfaces we're already familiar with.
 
 To explore this idea, I plan to build a comic book studio. A browser based application that lets you write and illustrate your own comic book, but with the help of Generative AI. Here's a few reasons why I keep coming back to this idea:
