@@ -33,6 +33,9 @@ plugins:
 
 minimal_mistakes_skin: "air"
 
+analytics:
+  provider: "custom"
+
 collections:
   portfolio:
     output: true
