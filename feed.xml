@@ -1,4 +1,162 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://www.bluepail.co//feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.bluepail.co//" rel="alternate" type="text/html" /><updated>2024-02-17T22:10:52+00:00</updated><id>https://www.bluepail.co//feed.xml</id><title type="html">Blue Pail</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Building an app with Generative AI</title><link href="https://www.bluepail.co//2024/02/14/build-an-app-with-gen-ai.html" rel="alternate" type="text/html" title="Building an app with Generative AI" /><published>2024-02-14T00:00:00+00:00</published><updated>2024-02-14T00:00:00+00:00</updated><id>https://www.bluepail.co//2024/02/14/build-an-app-with-gen-ai</id><content type="html" xml:base="https://www.bluepail.co//2024/02/14/build-an-app-with-gen-ai.html"><![CDATA[<p><img src="/assets/images/robots-and-humans-working-together.png" alt="A vibrant celebration between a human and a robot" /></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://www.bluepail.co//feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.bluepail.co//" rel="alternate" type="text/html" /><updated>2024-02-22T17:42:39+00:00</updated><id>https://www.bluepail.co//feed.xml</id><title type="html">Blue Pail</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">LLM Apps series: Experimenting with masks</title><link href="https://www.bluepail.co//2024/02/22/llm-apps-1-experimenting-with-masks.html" rel="alternate" type="text/html" title="LLM Apps series: Experimenting with masks" /><published>2024-02-22T00:00:00+00:00</published><updated>2024-02-22T00:00:00+00:00</updated><id>https://www.bluepail.co//2024/02/22/llm-apps-1-experimenting-with-masks</id><content type="html" xml:base="https://www.bluepail.co//2024/02/22/llm-apps-1-experimenting-with-masks.html"><![CDATA[<p>Before I do too much architecture or design, I want to get in and see how things really behave. My experience with image diffusers is mostly with Stable Diffusion in the Automatic1111 interface. A little bit of ComfyUI. But I’ve done very little prompting and generation through code. <a href="/portfolio/cables-stable-diffusion.html">A little bit here.</a> So I’m going to start by getting my hands dirty, and hopefully learning something applicable.</p>
+
+<p>Also, I have an idea to address a problem, which is…</p>
+
+<h2 id="image-generators-suck-at-text">Image generators suck at text</h2>
+<p>In a comic book, you want the dialogue and narration to be a part of your image. It helps you tell who is saying what, and it keeps you in the visual space. But image generators are not capable of writing really any text, let alone the text you wanted.</p>
+
+<p>The easy solution is to just add text into your image with some other software, like photoshop. This post-processing could be added to our app, and may end up being the solution. One thing I’m worried about is generating an image whose layout doesn’t leave obvious space for your text. You don’t want to generate an image and then need to cover up something important with a speech bubble.</p>
+
+<p>What if we could go the other way around? What if we could put the speech bubble where we want it, and ask our image generator fill in the layout around it.</p>
+
+<h2 id="inpainting-with-stable-diffusion">Inpainting with Stable Diffusion</h2>
+
+<p>With image generation AI, some services will allow you to regenerate just part of the image. Maybe you’ve got a great image except the hands came out kind of twisted, and you want to just regenerate the hands until they look good. This is referred to as <a href="https://getimg.ai/guides/inpainting-with-stable-diffusion">Inpainting</a>.</p>
+
+<p>This has a distinct advantage over just pasting hands (or speech bubbles) over your existing image. The new pixels and the old pixels are all run through the pipeline together, and treated as one package. It allows the image model to make a coherent image. As the model slowly generates an image from noise, it sees your pre-defined parts of the image as part of the new image, and builds inside. It nicely draws things together as one image, instead of hard boundaries you get from just pasting one image on top of another.</p>
+
+<p>Now, the term is Inpainting, but it works just as well to save a small part of your image, and generate around it. Which is what we’re going to attempt…</p>
+
+<h2 id="lets-try-outpainting">Let’s try Outpainting!</h2>
+
+<h3 id="round-1">Round 1</h3>
+
+<p>For the first test, I just created a basic image and mask in GIMP. Then I used the <a href="https://platform.stability.ai/">Stability AI API</a> to generate some images.</p>
+
+<figure class="third ">
+  
+    
+      <a href="/assets/images/llm_apps/v1_img2img_masking_0-a.png" title="1st result">
+          <img src="/assets/images/llm_apps/v1_img2img_masking_0-a.png" alt="Experiment result" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/llm_apps/v1_img2img_masking_0-b.png" title="2nd result">
+          <img src="/assets/images/llm_apps/v1_img2img_masking_0-b.png" alt="Experiment result" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/llm_apps/v1_img2img_masking_0-c.png" title="3rd result">
+          <img src="/assets/images/llm_apps/v1_img2img_masking_0-c.png" alt="Experiment result" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/llm_apps/init_image_1024.png" title="Initial Image">
+          <img src="/assets/images/llm_apps/init_image_1024.png" alt="Initial image before 'inpainting'" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/llm_apps/mask_image_black_1024.png" title="White is mask. Black will be generated">
+          <img src="/assets/images/llm_apps/mask_image_black_1024.png" alt="Mask area" />
+      </a>
+    
+  
+  
+</figure>
+
+<p>So, you can indeed generate an image around your text! 🙌</p>
+
+<p>I especially like that although my mask was perfectly round, the speech bubble was not, giving it a more organic feel.</p>
+
+<p>A couple other things I noted are that the generated bubble is not always perfectly white, and the original background stands out. You may have also noticed a double attribution for one of the bubbles.</p>
+
+<h3 id="round-2">Round 2</h3>
+
+<p>As a next step, I wrote some python code to generate these initial text-only images of a panel. I also discovered that the API could take a single image, where visible pixels would be “masked” and transparent pixels would be generated.</p>
+
+<figure class="third ">
+  
+    
+      <a href="/assets/images/llm_apps/v1_img2img_masking_0-d.png" title="1st result">
+          <img src="/assets/images/llm_apps/v1_img2img_masking_0-d.png" alt="Experiment result" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/llm_apps/v1_img2img_masking_0-e.png" title="2nd result">
+          <img src="/assets/images/llm_apps/v1_img2img_masking_0-e.png" alt="Experiment result" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/llm_apps/v1_img2img_masking_0-f.png" title="3rd result">
+          <img src="/assets/images/llm_apps/v1_img2img_masking_0-f.png" alt="Experiment result" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/llm_apps/bear-panel.png" title="Transparent pixels get generated">
+          <img src="/assets/images/llm_apps/bear-panel.png" alt="Mask area" />
+      </a>
+    
+  
+  
+</figure>
+
+<p>I found that if there was not sufficient masked space around the text, the generated image would try to add more text in line with mine. In one test, I didn’t include any background at all, and the generator kind of reclaimed the text. I started to suspect that maybe the API was blurring the mask in an attempt to create a more natural result.</p>
+
+<p>Also, we’re still getting those double speech bubbles.</p>
+
+<h3 id="round-3">Round 3</h3>
+
+<p>Since I was getting some unexpected behavior from Stablity’s API, I wanted to see if I could get a more “raw” experience with the SDXL model. So I went to <a href="https://replicate.com/stability-ai/sdxl">Replicate</a> to use their API instead.</p>
+
+<figure class="third ">
+  
+    
+      <a href="/assets/images/llm_apps/output-1.png" title="Prompt includes 'narrative text at the bottom'">
+          <img src="/assets/images/llm_apps/output-1.png" alt="1st result" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/llm_apps/output-2.png" title="Prompt includes 'narrative text at the bottom'">
+          <img src="/assets/images/llm_apps/output-2.png" alt="2nd result" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/llm_apps/output-3.png" title="Prompt includes 'narrative text at the bottom'">
+          <img src="/assets/images/llm_apps/output-3.png" alt="3rd result" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/llm_apps/panel.png" title="My initial image">
+          <img src="/assets/images/llm_apps/panel.png" alt="Initial Panel" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/llm_apps/mask.png" title="Black is mask. White will be generated">
+          <img src="/assets/images/llm_apps/mask.png" alt="Mask area" />
+      </a>
+    
+  
+  
+</figure>
+
+<p>I was not getting the same fuzzy boundary around my mask. I also wasn’t getting what I had hoped for, which was a clearly defined background for the narrative text. I’m still getting extra speech bubble pointers, and extra speech bubbles. Which is no surprise really. This is the same model as I was using before just a different provider.</p>
+
+<h2 id="learnings">Learnings</h2>
+
+<h3 id="api-differences">API differences</h3>
+
+<p>I had expected models to give meaningfully different results and behaviors, but didn’t think about how each API might behave differently. I wonder how I might document this in the code.</p>
+
+<h3 id="supporting-a-multiple-backends">Supporting a multiple backends</h3>
+
+<p>One of the key points in my original post was that you are going to want to swap models in and out to optimize performance and output. It turns out my code needs to be ready to support not just different models, but communication with different platforms. The same model on two different platforms had different behavior and capabilities.</p>
+
+<h3 id="modular-prompting">Modular Prompting</h3>
+
+<p>Again, in the spirit if iteration, I know that my users will want to be able to quickly iterate prompts to get the results they want. For my needs, I created an array of strings that I could quickly add or comment out to get different results. This worked for me, and could potentially be translated into a UI for the user. Something where you’re dragging and dropping pre-defined or custom snippets into a prompt, and be able to compare the results.</p>
+
+<p>All of this kind of begs the question, “so what does the code look like.” But we’ll have to get into that another time. 😉</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Before I do too much architecture or design, I want to get in and see how things really behave. My experience with image diffusers is mostly with Stable Diffusion in the Automatic1111 interface. A little bit of ComfyUI. But I’ve done very little prompting and generation through code. A little bit here. So I’m going to start by getting my hands dirty, and hopefully learning something applicable.]]></summary></entry><entry><title type="html">Building an app with Generative AI</title><link href="https://www.bluepail.co//2024/02/14/build-an-app-with-gen-ai.html" rel="alternate" type="text/html" title="Building an app with Generative AI" /><published>2024-02-14T00:00:00+00:00</published><updated>2024-02-14T00:00:00+00:00</updated><id>https://www.bluepail.co//2024/02/14/build-an-app-with-gen-ai</id><content type="html" xml:base="https://www.bluepail.co//2024/02/14/build-an-app-with-gen-ai.html"><![CDATA[<p><img src="/assets/images/robots-and-humans-working-together.png" alt="A vibrant celebration between a human and a robot" /></p>
 
 <p><a href="https://www.youtube.com/watch?v=kNiY-HYaqUc">I gave a talk in the summer of 2023</a> about how the chatbot is just an interface, and not always the best interface. Well, the chatbot obsession rages on. I want to show that Large Language Models, Image Diffusers and other AI models can augment the applications we use today using interfaces we’re already familiar with.</p>
 

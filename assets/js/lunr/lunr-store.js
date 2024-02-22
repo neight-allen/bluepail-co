@@ -22,4 +22,10 @@ var store = [{
         "tags": [],
         "url": "/2024/02/14/build-an-app-with-gen-ai.html",
         "teaser": null
+      },{
+        "title": "LLM Apps series: Experimenting with masks",
+        "excerpt":"Before I do too much architecture or design, I want to get in and see how things really behave. My experience with image diffusers is mostly with Stable Diffusion in the Automatic1111 interface. A little bit of ComfyUI. But I’ve done very little prompting and generation through code. A little...","categories": [],
+        "tags": [],
+        "url": "/2024/02/22/llm-apps-1-experimenting-with-masks.html",
+        "teaser": null
       }]

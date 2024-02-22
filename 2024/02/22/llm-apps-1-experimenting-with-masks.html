@@ -1,0 +1,440 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>LLM Apps series: Experimenting with masks - Blue Pail</title>
+<meta name="description" content="Before I do too much architecture or design, I want to get in and see how things really behave. My experience with image diffusers is mostly with Stable Diffusion in the Automatic1111 interface. A little bit of ComfyUI. But I’ve done very little prompting and generation through code. A little bit here. So I’m going to start by getting my hands dirty, and hopefully learning something applicable.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Blue Pail">
+<meta property="og:title" content="LLM Apps series: Experimenting with masks">
+<meta property="og:url" content="https://www.bluepail.co//2024/02/22/llm-apps-1-experimenting-with-masks.html">
+
+
+  <meta property="og:description" content="Before I do too much architecture or design, I want to get in and see how things really behave. My experience with image diffusers is mostly with Stable Diffusion in the Automatic1111 interface. A little bit of ComfyUI. But I’ve done very little prompting and generation through code. A little bit here. So I’m going to start by getting my hands dirty, and hopefully learning something applicable.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2024-02-22T00:00:00+00:00">
+
+
+
+
+
+
+<link rel="canonical" href="https://www.bluepail.co//2024/02/22/llm-apps-1-experimenting-with-masks.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://www.bluepail.co//"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Blue Pail Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          <img src="/assets/images/blue-pail.png" />
+          Blue Pail
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/portfolio/">Portfolio</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="LLM Apps series: Experimenting with masks">
+    <meta itemprop="description" content="Before I do too much architecture or design, I want to get in and see how things really behave. My experience with image diffusers is mostly with Stable Diffusion in the Automatic1111 interface. A little bit of ComfyUI. But I’ve done very little prompting and generation through code. A little bit here. So I’m going to start by getting my hands dirty, and hopefully learning something applicable.">
+    <meta itemprop="datePublished" content="2024-02-22T00:00:00+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">LLM Apps series: Experimenting with masks
+</h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#image-generators-suck-at-text">Image generators suck at text</a></li><li><a href="#inpainting-with-stable-diffusion">Inpainting with Stable Diffusion</a></li><li><a href="#lets-try-outpainting">Let’s try Outpainting!</a><ul><li><a href="#round-1">Round 1</a></li><li><a href="#round-2">Round 2</a></li><li><a href="#round-3">Round 3</a></li></ul></li><li><a href="#learnings">Learnings</a><ul><li><a href="#api-differences">API differences</a></li><li><a href="#supporting-a-multiple-backends">Supporting a multiple backends</a></li><li><a href="#modular-prompting">Modular Prompting</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p>Before I do too much architecture or design, I want to get in and see how things really behave. My experience with image diffusers is mostly with Stable Diffusion in the Automatic1111 interface. A little bit of ComfyUI. But I’ve done very little prompting and generation through code. <a href="/portfolio/cables-stable-diffusion.html">A little bit here.</a> So I’m going to start by getting my hands dirty, and hopefully learning something applicable.</p>
+
+<p>Also, I have an idea to address a problem, which is…</p>
+
+<h2 id="image-generators-suck-at-text">Image generators suck at text</h2>
+<p>In a comic book, you want the dialogue and narration to be a part of your image. It helps you tell who is saying what, and it keeps you in the visual space. But image generators are not capable of writing really any text, let alone the text you wanted.</p>
+
+<p>The easy solution is to just add text into your image with some other software, like photoshop. This post-processing could be added to our app, and may end up being the solution. One thing I’m worried about is generating an image whose layout doesn’t leave obvious space for your text. You don’t want to generate an image and then need to cover up something important with a speech bubble.</p>
+
+<p>What if we could go the other way around? What if we could put the speech bubble where we want it, and ask our image generator fill in the layout around it.</p>
+
+<h2 id="inpainting-with-stable-diffusion">Inpainting with Stable Diffusion</h2>
+
+<p>With image generation AI, some services will allow you to regenerate just part of the image. Maybe you’ve got a great image except the hands came out kind of twisted, and you want to just regenerate the hands until they look good. This is referred to as <a href="https://getimg.ai/guides/inpainting-with-stable-diffusion">Inpainting</a>.</p>
+
+<p>This has a distinct advantage over just pasting hands (or speech bubbles) over your existing image. The new pixels and the old pixels are all run through the pipeline together, and treated as one package. It allows the image model to make a coherent image. As the model slowly generates an image from noise, it sees your pre-defined parts of the image as part of the new image, and builds inside. It nicely draws things together as one image, instead of hard boundaries you get from just pasting one image on top of another.</p>
+
+<p>Now, the term is Inpainting, but it works just as well to save a small part of your image, and generate around it. Which is what we’re going to attempt…</p>
+
+<h2 id="lets-try-outpainting">Let’s try Outpainting!</h2>
+
+<h3 id="round-1">Round 1</h3>
+
+<p>For the first test, I just created a basic image and mask in GIMP. Then I used the <a href="https://platform.stability.ai/">Stability AI API</a> to generate some images.</p>
+
+<figure class="third ">
+  
+    
+      <a href="/assets/images/llm_apps/v1_img2img_masking_0-a.png" title="1st result">
+          <img src="/assets/images/llm_apps/v1_img2img_masking_0-a.png" alt="Experiment result" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/llm_apps/v1_img2img_masking_0-b.png" title="2nd result">
+          <img src="/assets/images/llm_apps/v1_img2img_masking_0-b.png" alt="Experiment result" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/llm_apps/v1_img2img_masking_0-c.png" title="3rd result">
+          <img src="/assets/images/llm_apps/v1_img2img_masking_0-c.png" alt="Experiment result" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/llm_apps/init_image_1024.png" title="Initial Image">
+          <img src="/assets/images/llm_apps/init_image_1024.png" alt="Initial image before 'inpainting'" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/llm_apps/mask_image_black_1024.png" title="White is mask. Black will be generated">
+          <img src="/assets/images/llm_apps/mask_image_black_1024.png" alt="Mask area" />
+      </a>
+    
+  
+  
+</figure>
+
+<p>So, you can indeed generate an image around your text! 🙌</p>
+
+<p>I especially like that although my mask was perfectly round, the speech bubble was not, giving it a more organic feel.</p>
+
+<p>A couple other things I noted are that the generated bubble is not always perfectly white, and the original background stands out. You may have also noticed a double attribution for one of the bubbles.</p>
+
+<h3 id="round-2">Round 2</h3>
+
+<p>As a next step, I wrote some python code to generate these initial text-only images of a panel. I also discovered that the API could take a single image, where visible pixels would be “masked” and transparent pixels would be generated.</p>
+
+<figure class="third ">
+  
+    
+      <a href="/assets/images/llm_apps/v1_img2img_masking_0-d.png" title="1st result">
+          <img src="/assets/images/llm_apps/v1_img2img_masking_0-d.png" alt="Experiment result" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/llm_apps/v1_img2img_masking_0-e.png" title="2nd result">
+          <img src="/assets/images/llm_apps/v1_img2img_masking_0-e.png" alt="Experiment result" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/llm_apps/v1_img2img_masking_0-f.png" title="3rd result">
+          <img src="/assets/images/llm_apps/v1_img2img_masking_0-f.png" alt="Experiment result" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/llm_apps/bear-panel.png" title="Transparent pixels get generated">
+          <img src="/assets/images/llm_apps/bear-panel.png" alt="Mask area" />
+      </a>
+    
+  
+  
+</figure>
+
+<p>I found that if there was not sufficient masked space around the text, the generated image would try to add more text in line with mine. In one test, I didn’t include any background at all, and the generator kind of reclaimed the text. I started to suspect that maybe the API was blurring the mask in an attempt to create a more natural result.</p>
+
+<p>Also, we’re still getting those double speech bubbles.</p>
+
+<h3 id="round-3">Round 3</h3>
+
+<p>Since I was getting some unexpected behavior from Stablity’s API, I wanted to see if I could get a more “raw” experience with the SDXL model. So I went to <a href="https://replicate.com/stability-ai/sdxl">Replicate</a> to use their API instead.</p>
+
+<figure class="third ">
+  
+    
+      <a href="/assets/images/llm_apps/output-1.png" title="Prompt includes 'narrative text at the bottom'">
+          <img src="/assets/images/llm_apps/output-1.png" alt="1st result" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/llm_apps/output-2.png" title="Prompt includes 'narrative text at the bottom'">
+          <img src="/assets/images/llm_apps/output-2.png" alt="2nd result" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/llm_apps/output-3.png" title="Prompt includes 'narrative text at the bottom'">
+          <img src="/assets/images/llm_apps/output-3.png" alt="3rd result" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/llm_apps/panel.png" title="My initial image">
+          <img src="/assets/images/llm_apps/panel.png" alt="Initial Panel" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/llm_apps/mask.png" title="Black is mask. White will be generated">
+          <img src="/assets/images/llm_apps/mask.png" alt="Mask area" />
+      </a>
+    
+  
+  
+</figure>
+
+<p>I was not getting the same fuzzy boundary around my mask. I also wasn’t getting what I had hoped for, which was a clearly defined background for the narrative text. I’m still getting extra speech bubble pointers, and extra speech bubbles. Which is no surprise really. This is the same model as I was using before just a different provider.</p>
+
+<h2 id="learnings">Learnings</h2>
+
+<h3 id="api-differences">API differences</h3>
+
+<p>I had expected models to give meaningfully different results and behaviors, but didn’t think about how each API might behave differently. I wonder how I might document this in the code.</p>
+
+<h3 id="supporting-a-multiple-backends">Supporting a multiple backends</h3>
+
+<p>One of the key points in my original post was that you are going to want to swap models in and out to optimize performance and output. It turns out my code needs to be ready to support not just different models, but communication with different platforms. The same model on two different platforms had different behavior and capabilities.</p>
+
+<h3 id="modular-prompting">Modular Prompting</h3>
+
+<p>Again, in the spirit if iteration, I know that my users will want to be able to quickly iterate prompts to get the results they want. For my needs, I created an array of strings that I could quickly add or comment out to get different results. This worked for me, and could potentially be translated into a UI for the user. Something where you’re dragging and dropping pre-defined or custom snippets into a prompt, and be able to compare the results.</p>
+
+<p>All of this kind of begs the question, “so what does the code look like.” But we’ll have to get into that another time. 😉</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2024-02-22T00:00:00+00:00">February 22, 2024</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=LLM+Apps+series%3A+Experimenting+with+masks%20https%3A%2F%2Fwww.bluepail.co%2F%2F2024%2F02%2F22%2Fllm-apps-1-experimenting-with-masks.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.bluepail.co%2F%2F2024%2F02%2F22%2Fllm-apps-1-experimenting-with-masks.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fwww.bluepail.co%2F%2F2024%2F02%2F22%2Fllm-apps-1-experimenting-with-masks.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2024/02/14/build-an-app-with-gen-ai.html" class="pagination--pager" title="Building an app with Generative AI
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://www.linkedin.com/in/neightallen/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/neight-allen" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/channel/UCc4fzj_aPIrCOzIIaxW-DMw" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+        
+          <li><a href="https://soundcloud.com/gilcrest" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-soundcloud" aria-hidden="true"></i> Soundcloud</a></li>
+        
+      
+        
+          <li><a href="mailto:nate@bluepail.co" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope" aria-hidden="true"></i> Email</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Blue Pail. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+  <script async data-id="101444095" src="//static.getclicky.com/js"></script>
+
+
+
+
+
+
+
+
+  </body>
+</html>
