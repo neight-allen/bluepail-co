@@ -1,6 +1,7 @@
 ---
 layout: single
 title: "Building an app with Generative AI"
+share: true
 ---
 
 ![A vibrant celebration between a human and a robot](/assets/images/robots-and-humans-working-together.png)
