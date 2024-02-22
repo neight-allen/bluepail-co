@@ -1,6 +1,7 @@
 ---
 layout: single
 title: "Emerging AI interfaces: Beyond the chatbot"
+share: true
 ---
 **The chatbot demos well.**
 
